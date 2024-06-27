@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MakeMandleBrot {
+class MakeMandlebrot {
     private let maxIterations = 1000
     private let escapeRadius = 2.0
 
@@ -17,7 +17,7 @@ class MakeMandleBrot {
     private var zoom: Double
     private var offsetX: Double
     private var offsetY: Double
-
+    // MARK: Initialize brot
     init(width: Int, height: Int, zoom: Double, offsetX: Double, offsetY: Double) {
         self.width = width
         self.height = height
@@ -25,7 +25,7 @@ class MakeMandleBrot {
         self.offsetX = offsetX
         self.offsetY = offsetY
     }
-
+    // MARK: make Brot and return image
     func makeMandelbrot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), false, 0.0)
         defer { UIGraphicsEndImageContext() }

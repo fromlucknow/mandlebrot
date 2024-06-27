@@ -9,14 +9,14 @@ import UIKit
 import UIKit
 
 class ViewController: UIViewController {
-
+    // MARK: Variables
     private var imageView: UIImageView!
 
     private var zoom: Double = 1.0
     private var offsetX: Double = 0.0
     private var offsetY: Double = 0.0
 
-    private let mandelbrot = MakeMandleBrot(width: 800, height: 600, zoom: 1.0, offsetX: 0.0, offsetY: 0.0)
+    private let mandelbrot = MakeMandlebrot(width: 800, height: 600, zoom: 1.0, offsetX: 0.0, offsetY: 0.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         imageView.image = #imageLiteral(resourceName: "BOY")
         updateMandelbrot()
     }
-
+    // MARK: Pan gesture
     @objc private func handlePan(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: imageView)
         offsetX -= Double(translation.x) / zoom
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         recognizer.setTranslation(.zero, in: imageView)
         updateMandelbrot()
     }
-
+    // MARK: Zoom Gesture
     @objc private func handlePinch(_ recognizer: UIPinchGestureRecognizer) {
         if recognizer.state == .changed {
             zoom *= Double(recognizer.scale)
@@ -50,6 +50,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // MARK: Update Brot
     private func updateMandelbrot() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
